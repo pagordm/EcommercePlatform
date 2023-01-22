@@ -19,7 +19,23 @@ public class Item {
         return this.price;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     public int getId() {
         return this.id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Item item) {
+            return item.getId() == this.getId();
+        }
+        return false;
     }
 }

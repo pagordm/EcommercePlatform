@@ -3,7 +3,10 @@ package org.commerceplatform;
 public class Payment {
     private double amount;
 
-    public Payment(double amount, boolean isPaid) {
+    private Order order;
+
+    public Payment(Order order, double amount, boolean isPaid) {
+        this.order = order;
         this.amount = amount;
         this.isPaid = isPaid;
     }

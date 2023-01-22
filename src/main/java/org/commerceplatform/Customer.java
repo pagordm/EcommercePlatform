@@ -42,4 +42,8 @@ public class Customer {
     public void setId(int id) {
         this.id = id;
     }
+
+    public Cart getUserCart() {
+        return this.userCart;
+    }
 }

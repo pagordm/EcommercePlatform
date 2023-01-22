@@ -16,4 +16,8 @@ public class ItemCatalogue {
         if (item.isEmpty()) return null;
         return item.get();
     }
+
+    public int getStock(Item i) {
+        return stock.get(i);
+    }
 }

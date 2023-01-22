@@ -2,21 +2,24 @@ package org.commerceplatform.data;
 
 import org.commerceplatform.*;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.text.DecimalFormat;
+import java.util.*;
 
 public class DataLoader {
 
     public static final String[] ITEM_NAMES = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9", "Item 10"};
     private static final String ITEM_DESC = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
+    public static final List<Item> ITEM_LIST = new ArrayList<>();
     public static Map<Item, Integer> getItemCatalogueData() {
         Random r = new Random();
         Map<Item, Integer> map = new HashMap<>();
         int id = 0;
         for(String name : ITEM_NAMES) {
+
             double price = r.nextDouble()*50;
+
+
             Item i = new Item(id ,price, price + r.nextDouble()*10, ITEM_NAMES[id], ITEM_DESC);
             int stock = r.nextInt(0, 100);
             if (id % 3 == 0) {
@@ -24,6 +27,7 @@ public class DataLoader {
             }
             id++;
             map.put(i, stock);
+            ITEM_LIST.add(i);
         }
         return map;
     }
@@ -41,7 +45,7 @@ public class DataLoader {
             }
 
             Order o = new Order(details);
-            Payment p = new Payment(o.getTotalPrice(), r.nextBoolean());
+            Payment p = new Payment(o, o.getTotalPrice(), r.nextBoolean());
 
             data.put(o, p);
         }
