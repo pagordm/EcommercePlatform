@@ -17,16 +17,9 @@ public class Payment {
         return this.amount;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
     public boolean isPaid() {
         return this.isPaid;
     }
 
-    public void setPaid(boolean paid) {
-        this.isPaid = paid;
-    }
 
 }

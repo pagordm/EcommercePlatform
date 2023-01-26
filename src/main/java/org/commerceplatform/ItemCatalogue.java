@@ -1,7 +1,6 @@
 package org.commerceplatform;
 
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class ItemCatalogue {
 
@@ -19,5 +18,9 @@ public class ItemCatalogue {
 
     public int getStock(Item i) {
         return stock.get(i);
+    }
+
+    public List<Item> getItems() {
+        return new ArrayList<>(this.stock.keySet());
     }
 }

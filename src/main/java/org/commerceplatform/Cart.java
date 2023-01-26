@@ -6,36 +6,21 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Cart {
-    private Optional<Customer> customer;
+    private Customer customer;
 
-    private List<Item> items; //ID of carted items (with duplicates for qty)
-    boolean isLoggedIn;
+    private List<OrderDetail> items; //ID of carted items (with duplicates for qty)
 
     public Cart (Customer c) {
-        this.customer = Optional.of(c);
-        this.isLoggedIn = true;
-        this.items = new ArrayList<>();
-    }
-
-    public Cart() {
-        this.customer = Optional.empty();
-        this.isLoggedIn = false;
+        this.customer = c;
         this.items = new ArrayList<>();
     }
 
     public Order checkout() {
-        List<OrderDetail> list = new ArrayList<>();
-        for(Item i : this.items.stream().distinct().toList()) {
-            list.add(new OrderDetail(i, (int) this.items.stream().filter(i::equals).count()));
-        }
-        return new Order(list.toArray(new OrderDetail[0]));
+        return new Order(this.items.toArray(new OrderDetail[0]));
     }
 
-    public void addItemToCart(Item i) {
-        this.items.add(i);
+    public void addItemToCart(Item i, int qty) {
+        this.items.add(new OrderDetail(i, qty));
     }
 
-    public List<Item> getItemList() {
-        return this.items;
-    }
 }

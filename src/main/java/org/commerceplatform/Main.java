@@ -44,9 +44,8 @@ public class Main {
                     System.out.println("Not enough of this item is available!");
                     continue;
                 }
-                for (int j = 0; j < qty; j++) {
-                    c.getUserCart().addItemToCart(toAdd);
-                }
+                c.getUserCart().addItemToCart(toAdd, qty);
+
                 System.out.println("Added " + qty + "x " + toAdd.getName() + " to the user cart.");
             }
             else
@@ -65,15 +64,11 @@ public class Main {
         boolean proceed = k.nextLine().toLowerCase().equals("y");
         if (!proceed) return; //STOP
 
-        //TODO: Add some kind of payment processor?
-        System.out.println("Redirecting you to the payment processor...");
-
         //We add the purchase to the ledger:
         if (error) { //Simulate if there has been an error (or delay in the payment)
             System.out.println("An error on the payment has ocurred.");
             System.out.println("The payment will be automatically retried, your order is already confirmed.");
             l.addOrder(newOrder, new Payment(newOrder, newOrder.getTotalPrice(), false));
-            //TODO: retry payment?
         } else {
 
             System.out.println("Done, confirming order...");

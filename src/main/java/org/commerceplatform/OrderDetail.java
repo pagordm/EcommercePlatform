@@ -13,9 +13,6 @@ public class OrderDetail {
         return item.getPrice()*qty;
     }
 
-    public void changeAmount(int newQty) {
-        this.qty=newQty;
-    }
 
     public int getQty() {
         return this.qty;
