@@ -5,21 +5,20 @@ public class Payment {
 
     private Order order;
 
+    private boolean isPaid;
+
     public Payment(Order order, double amount, boolean isPaid) {
         this.order = order;
         this.amount = amount;
         this.isPaid = isPaid;
     }
 
-    private boolean isPaid;
 
-    public double getAmount() {
-        return this.amount;
+    public Order getOrder() {
+        return this.order;
     }
 
-    public boolean isPaid() {
-        return this.isPaid;
+    public void setPaid(boolean b) {
+        this.isPaid=b;
     }
-
-
 }

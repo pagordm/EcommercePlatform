@@ -8,14 +8,16 @@ import java.util.stream.Collectors;
 public class Order {
     int OrderId;
 
+    private Customer customer;
     public static int lastId = 1;
     Date createDate;
     private OrderDetail[] details;
 
-    public Order(OrderDetail[] details) {
+    public Order(OrderDetail[] details, Customer c) {
         this.createDate = new Date(); //Current time
         this.OrderId = lastId;
         this.details = details;
+        this.customer = c;
         lastId++;
     }
 
@@ -38,5 +40,9 @@ public class Order {
             if (o.getItem().equals(i)) return o.getQty();
         }
         return -1;
+    }
+
+    public Customer getCustomer() {
+        return this.customer;
     }
 }

@@ -10,14 +10,24 @@ public class Ledger {
         this.orders=orders;
     }
 
-    public boolean addOrder(Order o, Payment p) {
-        if (this.orders.containsKey(o)) return false;
-        this.orders.put(o, p);
-        return true;
+    public void addOrder(Payment p) {
+        this.orders.putIfAbsent(p.getOrder(), p);
     }
 
     public Map<Order, Payment> getOrders() {
         return this.orders;
+    }
+
+    public void markAsPaid(Payment p) {
+        this.orders.get(p.getOrder()).setPaid(true);
+    }
+
+    public Payment getLatestPayment(Customer customer) { //The latest payment is the one not marked as paid.
+        return this.orders.values().stream().filter(p -> p.getOrder().getCustomer().equals(customer)).findFirst().get();
+    }
+
+    public void removeOrder(Order o) {
+        this.orders.remove(o);
     }
 
 

@@ -44,8 +44,8 @@ public class DataLoader {
                 details[j] = new OrderDetail(items.getItemFromId(r.nextInt(ITEM_NAMES.length)), r.nextInt(1, 10));
             }
 
-            Order o = new Order(details);
-            Payment p = new Payment(o, o.getTotalPrice(), r.nextBoolean());
+            Order o = new Order(details, new Customer("foo", "bar"));
+            Payment p = new Payment(o, o.getTotalPrice(), true);
 
             data.put(o, p);
         }

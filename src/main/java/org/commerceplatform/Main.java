@@ -11,9 +11,7 @@ public class Main {
 
     public static final boolean error = false;
     public static void main(String[] args) {
-        ItemCatalogue items = new ItemCatalogue(DataLoader.getItemCatalogueData());
-        Ledger l = new Ledger(DataLoader.getLedgerData(items));
-        Store ourStore = new Store(1, l, items);
+        Store ourStore = new Store(1);
 
         //Create a new customer
         Customer c = new Customer("foo", "bar");
@@ -24,7 +22,7 @@ public class Main {
             System.out.println(i + ".- " + item.getName());
             System.out.println(item.getDescription());
             System.out.println(formatDouble(item.getPrice()) + "€");
-            System.out.println("Stock: " + items.getStock(item));
+            System.out.println("Stock: " + ourStore.getStock(item));
             System.out.println("--------------------------");
             i++;
         }
@@ -35,16 +33,16 @@ public class Main {
             System.out.print("> ");
             int selected = k.nextInt();
             if (selected == 0) break;
-            Item toAdd = items.getItemFromId(selected-1);
+            Item toAdd = ourStore.getItemFromId(selected-1);
             if (toAdd != null) {
                 System.out.print("Choose a qty: ");
 
                 int qty = k.nextInt();
-                if (items.getStock(toAdd) < qty) {
+                if (ourStore.getStock(toAdd) < qty) {
                     System.out.println("Not enough of this item is available!");
                     continue;
                 }
-                c.getUserCart().addItemToCart(toAdd, qty);
+                ourStore.addItemToUserCart(c, toAdd, qty);
 
                 System.out.println("Added " + qty + "x " + toAdd.getName() + " to the user cart.");
             }
@@ -53,26 +51,28 @@ public class Main {
 
         }
         System.out.println("Your cart: ");
-        Order newOrder = c.getUserCart().checkout();
-        for(Item item : newOrder.getItemList()) {
-            System.out.println(item.getName() + " x" + newOrder.getQty(item) + " : " + formatDouble(item.getPrice()* newOrder.getQty(item)) + "€");
+        ourStore.checkout(c);
+        Order checkoutOrder = ourStore.getCheckoutCart(c);
+        for(Item item : checkoutOrder.getItemList()) {
+            System.out.println(item.getName() + " x" + checkoutOrder.getQty(item) + " : " + formatDouble(item.getPrice()* checkoutOrder.getQty(item)) + "€");
         }
-        System.out.println("Total: " + formatDouble(newOrder.getTotalPrice()) + "€");
+        System.out.println("Total: " + formatDouble(checkoutOrder.getTotalPrice()) + "€");
         System.out.println("Do you want to proceed? y/N");
         System.out.print("> ");
         k.nextLine();
-        boolean proceed = k.nextLine().toLowerCase().equals("y");
+        boolean proceed = k.nextLine().equalsIgnoreCase("y");
         if (!proceed) return; //STOP
 
         //We add the purchase to the ledger:
         if (error) { //Simulate if there has been an error (or delay in the payment)
             System.out.println("An error on the payment has ocurred.");
-            System.out.println("The payment will be automatically retried, your order is already confirmed.");
-            l.addOrder(newOrder, new Payment(newOrder, newOrder.getTotalPrice(), false));
+            System.out.println("The order has been cancelled.");
+
+            ourStore.removeLatestOrder(c);
         } else {
 
             System.out.println("Done, confirming order...");
-            l.addOrder(newOrder, new Payment(newOrder, newOrder.getTotalPrice(), true));
+            ourStore.payOrder(c);
         }
     }
 

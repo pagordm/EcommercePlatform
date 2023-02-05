@@ -20,7 +20,4 @@ public class ItemCatalogue {
         return stock.get(i);
     }
 
-    public List<Item> getItems() {
-        return new ArrayList<>(this.stock.keySet());
-    }
 }

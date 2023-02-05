@@ -2,21 +2,19 @@ package org.commerceplatform;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class Cart {
-    private Customer customer;
 
-    private List<OrderDetail> items; //ID of carted items (with duplicates for qty)
+    private final List<OrderDetail> items; //ID of carted items
+    private final Customer customer;
 
     public Cart (Customer c) {
-        this.customer = c;
+        this.customer=c;
         this.items = new ArrayList<>();
     }
 
     public Order checkout() {
-        return new Order(this.items.toArray(new OrderDetail[0]));
+        return new Order(this.items.toArray(new OrderDetail[0]), this.customer);
     }
 
     public void addItemToCart(Item i, int qty) {
