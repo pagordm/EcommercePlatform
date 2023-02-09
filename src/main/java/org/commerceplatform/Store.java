@@ -21,8 +21,7 @@ public class Store {
 
     public void checkout(Customer c) {
         Order o = c.getUserCart().createOrder();
-        Payment newPayment = new Payment(o, o.getTotalPrice(), false);
-        this.ledger.addOrder(newPayment);
+        this.ledger.addOrder(o);
     }
 
 

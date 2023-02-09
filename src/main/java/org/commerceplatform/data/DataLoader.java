@@ -20,7 +20,7 @@ public class DataLoader {
             double price = r.nextDouble()*50;
 
 
-            Item i = new Item(id ,price, price + r.nextDouble()*10, ITEM_NAMES[id], ITEM_DESC);
+            Item i = new Item(id ,price, ITEM_NAMES[id], ITEM_DESC);
             int stock = r.nextInt(0, 100);
             if (id % 3 == 0) {
                 stock = 0;

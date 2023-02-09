@@ -10,8 +10,9 @@ public class Ledger {
         this.orders=orders;
     }
 
-    public void addOrder(Payment p) {
-        this.orders.putIfAbsent(p.getOrder(), p);
+    public void addOrder(Order o) {
+        Payment newPayment = new Payment(o, o.getTotalPrice(), false);
+        this.orders.putIfAbsent(o, newPayment);
     }
 
     public Map<Order, Payment> getOrders() {
