@@ -11,9 +11,10 @@ public class ItemCatalogue {
     }
 
     public Item getItemFromId(int ID) {
-        Optional<Item> item = stock.keySet().stream().filter(i -> i.getId()==ID).findFirst();
-        if (item.isEmpty()) return null;
-        return item.get();
+        for(Item i : this.stock.keySet()) {
+            if (i.getId()==ID) return i;
+        }
+        return null;
     }
 
     public int getStock(Item i) {

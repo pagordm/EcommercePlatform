@@ -21,17 +21,12 @@ public class Store {
 
     public void checkout(Customer c) {
         Order o = c.getUserCart().createOrder();
-        this.ledger.addOrder(o);
+        this.ledger.addPayment(o);
+    }
+
+    public Ledger getLedger() {
+        return this.ledger;
     }
 
 
-    public void payOrder(Customer c) {
-        //Payment logic would go here...
-
-        this.ledger.markAsPaid(this.ledger.getLatestPayment(c));
-    }
-
-    public void removeLatestOrder(Customer c) {
-        this.ledger.removeOrder(this.ledger.getLatestPayment(c).getOrder());
-    }
 }

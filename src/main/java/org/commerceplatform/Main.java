@@ -68,11 +68,11 @@ public class Main {
             System.out.println("An error on the payment has ocurred.");
             System.out.println("The order has been cancelled.");
 
-            ourStore.removeLatestOrder(c);
+            ourStore.getLedger().removeLatestPayment(c);
         } else {
 
             System.out.println("Done, confirming order...");
-            ourStore.payOrder(c);
+            ourStore.getLedger().getLatestPayment(c).setPaid(true);
         }
     }
 

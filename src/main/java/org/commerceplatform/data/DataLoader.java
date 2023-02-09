@@ -32,9 +32,9 @@ public class DataLoader {
         return map;
     }
 
-    public static Map<Order, Payment> getLedgerData(ItemCatalogue items) {
+    public static List<Payment> getLedgerData(ItemCatalogue items) {
         Random r = new Random();
-        Map<Order, Payment> data = new HashMap<>();
+        List<Payment> data = new ArrayList<>();
         int order_amount = r.nextInt(5,20);
         for (int i = 0; i < order_amount; i++) {
 
@@ -47,7 +47,7 @@ public class DataLoader {
             Order o = new Order(details, new Customer("foo", "bar"));
             Payment p = new Payment(o, o.getTotalPrice(), true);
 
-            data.put(o, p);
+            data.add(p);
         }
         return data;
     }

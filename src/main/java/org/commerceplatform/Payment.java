@@ -21,4 +21,8 @@ public class Payment {
     public void setPaid(boolean b) {
         this.isPaid=b;
     }
+
+    public boolean isPaid() {
+        return this.isPaid;
+    }
 }

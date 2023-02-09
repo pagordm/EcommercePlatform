@@ -1,34 +1,34 @@
 package org.commerceplatform;
 
-import java.util.Map;
+import java.util.List;
 
 public class Ledger {
 
-    private final Map<Order, Payment> orders;
+    private final List<Payment> payments;
 
-    public Ledger(Map<Order, Payment> orders) {
-        this.orders=orders;
+    public Ledger(List<Payment> payments) {
+        this.payments = payments;
     }
 
-    public void addOrder(Order o) {
-        Payment newPayment = new Payment(o, o.getTotalPrice(), false);
-        this.orders.putIfAbsent(o, newPayment);
+    public void addPayment(Order order) {
+        Payment newPayment = new Payment(order, order.getTotalPrice(), false);
+        this.payments.add(newPayment);
     }
 
-    public Map<Order, Payment> getOrders() {
-        return this.orders;
+    public Payment getLatestPayment(Customer c) {
+        for(Payment o : this.payments) {
+            if (o.getOrder().getCustomer().equals(c) && !o.isPaid())
+                return o;
+        }
+        return null;
     }
 
-    public void markAsPaid(Payment p) {
-        this.orders.get(p.getOrder()).setPaid(true);
+    public void removePayment(Payment o) {
+        this.payments.remove(o);
     }
 
-    public Payment getLatestPayment(Customer customer) { //The latest payment is the one not marked as paid.
-        return this.orders.values().stream().filter(p -> p.getOrder().getCustomer().equals(customer)).findFirst().get();
-    }
-
-    public void removeOrder(Order o) {
-        this.orders.remove(o);
+    public void removeLatestPayment(Customer c) {
+        this.removePayment(this.getLatestPayment(c));
     }
 
 
