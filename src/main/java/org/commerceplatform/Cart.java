@@ -13,7 +13,7 @@ public class Cart {
         this.items = new ArrayList<>();
     }
 
-    public Order checkout() {
+    public Order createOrder() {
         return new Order(this.items.toArray(new OrderDetail[0]), this.customer);
     }
 

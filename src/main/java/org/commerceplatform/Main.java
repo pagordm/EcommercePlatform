@@ -22,7 +22,7 @@ public class Main {
             System.out.println(i + ".- " + item.getName());
             System.out.println(item.getDescription());
             System.out.println(formatDouble(item.getPrice()) + "€");
-            System.out.println("Stock: " + ourStore.getStock(item));
+            System.out.println("Stock: " + ourStore.getItemCatalogue().getStock(item));
             System.out.println("--------------------------");
             i++;
         }
@@ -33,16 +33,16 @@ public class Main {
             System.out.print("> ");
             int selected = k.nextInt();
             if (selected == 0) break;
-            Item toAdd = ourStore.getItemFromId(selected-1);
+            Item toAdd = ourStore.getItemCatalogue().getItemFromId(selected-1);
             if (toAdd != null) {
                 System.out.print("Choose a qty: ");
 
                 int qty = k.nextInt();
-                if (ourStore.getStock(toAdd) < qty) {
+                if (ourStore.getItemCatalogue().getStock(toAdd) < qty) {
                     System.out.println("Not enough of this item is available!");
                     continue;
                 }
-                ourStore.addItemToUserCart(c, toAdd, qty);
+                c.getUserCart().addItemToCart(toAdd, qty);
 
                 System.out.println("Added " + qty + "x " + toAdd.getName() + " to the user cart.");
             }
@@ -52,7 +52,7 @@ public class Main {
         }
         System.out.println("Your cart: ");
         ourStore.checkout(c);
-        Order checkoutOrder = ourStore.getCheckoutCart(c);
+        Order checkoutOrder = c.getUserCart().createOrder();
         for(Item item : checkoutOrder.getItemList()) {
             System.out.println(item.getName() + " x" + checkoutOrder.getQty(item) + " : " + formatDouble(item.getPrice()* checkoutOrder.getQty(item)) + "€");
         }

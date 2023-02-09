@@ -1,6 +1,6 @@
 package org.commerceplatform;
 
-public class User {
+public abstract class User {
     private String username;
     private String password;
     private int id;

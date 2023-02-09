@@ -15,27 +15,16 @@ public class Store {
     }
 
 
-    public void addItemToUserCart(Customer c, Item i, int qty) {
-        c.getUserCart().addItemToCart(i, qty);
-    }
-
-    public Item getItemFromId(int id) {
-        return this.catalogue.getItemFromId(id);
-    }
-
-    public int getStock(Item i) {
-        return this.catalogue.getStock(i);
+    public ItemCatalogue getItemCatalogue() {
+        return this.catalogue;
     }
 
     public void checkout(Customer c) {
-        Order o = c.getUserCart().checkout();
+        Order o = c.getUserCart().createOrder();
         Payment newPayment = new Payment(o, o.getTotalPrice(), false);
         this.ledger.addOrder(newPayment);
     }
 
-    public Order getCheckoutCart(Customer c) {
-        return this.ledger.getLatestPayment(c).getOrder();
-    }
 
     public void payOrder(Customer c) {
         //Payment logic would go here...

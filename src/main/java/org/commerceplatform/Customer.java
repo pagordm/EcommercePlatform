@@ -1,6 +1,6 @@
 package org.commerceplatform;
 
-public class Customer extends User{
+public class Customer extends User {
 
     private Cart userCart;
 
