@@ -4,7 +4,7 @@ import java.util.*;
 
 public class ItemCatalogue {
 
-    Map<Item, Integer> stock; // [ID, Stock]
+    Map<Item, Integer> stock;
 
     public ItemCatalogue(Map<Item, Integer > stock) {
         this.stock = stock;

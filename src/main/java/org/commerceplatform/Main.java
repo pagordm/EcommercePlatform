@@ -3,9 +3,7 @@ package org.commerceplatform;
 import org.commerceplatform.data.DataLoader;
 
 import java.text.DecimalFormat;
-import java.util.Objects;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Main {
 

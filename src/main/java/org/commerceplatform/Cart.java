@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Cart {
 
-    private final List<OrderDetail> items; //ID of carted items
+    private final List<OrderDetail> items;
     private final Customer customer;
 
     public Cart (Customer c) {
