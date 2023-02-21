@@ -34,5 +34,6 @@ public class DashboardHandler {
         } else if (this.statIdList.contains(id)){
             this.userStatIdList.add(id);
         }
+        DataLoader.saveEdits(id);
     }
 }

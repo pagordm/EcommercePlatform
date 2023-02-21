@@ -50,8 +50,14 @@ public class DataLoader {
         }
         return data;
     }
-
+    private static List<Integer> removed =  new ArrayList<>();
     public static List<Integer> getStatIdListForUser(int userId, List<Integer> statIdList) {
-        return statIdList;
+        List<Integer> list = new ArrayList<>(List.copyOf(statIdList));
+        list.removeAll(removed);
+        return list;
+    }
+
+    public static void saveEdits(int id) {
+        removed.add(id);
     }
 }
