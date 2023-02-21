@@ -2,7 +2,6 @@ package org.commerceplatform.data;
 
 import org.commerceplatform.*;
 
-import java.text.DecimalFormat;
 import java.util.*;
 
 public class DataLoader {
@@ -50,5 +49,9 @@ public class DataLoader {
             data.add(p);
         }
         return data;
+    }
+
+    public static List<Integer> getStatIdListForUser(int userId, List<Integer> statIdList) {
+        return statIdList;
     }
 }

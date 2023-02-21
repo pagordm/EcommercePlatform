@@ -19,9 +19,13 @@ public class Store {
         return this.catalogue;
     }
 
-    public void checkout(Customer c) {
-        Order o = c.getUserCart().createOrder();
+    public void checkout(Cart c) {
+        Order o = c.createOrder();
         this.ledger.addPayment(o);
+    }
+
+    public void addToCart(Cart c, int id, int qty) {
+        c.addItemToCart(this.catalogue.getItemFromId(id), qty);
     }
 
     public Ledger getLedger() {

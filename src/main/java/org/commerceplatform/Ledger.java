@@ -31,5 +31,21 @@ public class Ledger {
         this.removePayment(this.getLatestPayment(c));
     }
 
+    public double getTotalSales() {
+        double amount = 0;
+        for(Payment p : this.payments) {
+            amount += p.getAmount();
+        }
+        return amount;
+    }
+
+    public int getSalesForItem(int id) {
+        int i = 0;
+        for(Payment p : this.payments) {
+            i += p.getOrder().getSalesForItem(id);
+        }
+        return i;
+    }
+
 
 }

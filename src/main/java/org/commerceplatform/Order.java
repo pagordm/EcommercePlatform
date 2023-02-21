@@ -45,4 +45,14 @@ public class Order {
     public Customer getCustomer() {
         return this.customer;
     }
+
+    public int getSalesForItem(int id) {
+        int i = 0;
+        for(OrderDetail od : this.details) {
+            if (od.getItem().getId()==id) {
+                i += od.getQty();
+            }
+        }
+        return i;
+    }
 }

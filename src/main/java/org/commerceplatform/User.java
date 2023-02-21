@@ -13,5 +13,9 @@ public abstract class User {
         last_id++;
     }
 
+    public int getId() {
+        return this.id;
+    }
+
 
 }

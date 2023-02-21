@@ -36,4 +36,9 @@ public class Item {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return this.getName()+":"+Main.formatDouble(this.getPrice());
+    }
 }

@@ -25,4 +25,8 @@ public class Payment {
     public boolean isPaid() {
         return this.isPaid;
     }
+
+    public double getAmount() {
+        return this.amount;
+    }
 }
